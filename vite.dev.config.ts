@@ -1,8 +1,27 @@
 import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [react()],
+	plugins: [
+		react({
+			babel: {
+				plugins: [
+					[
+						'babel-plugin-styled-components',
+						{
+							displayName: true,
+							fileName: false,
+						},
+					],
+				],
+			},
+		}),
+		tsconfigPaths({
+			extensions: ['.ts', '.tsx'],
+		}),
+	],
 	server: {
 		open: true,
 	},
